@@ -1,0 +1,79 @@
+<div id="page-wrapper">       
+    <div class="row">
+        <div class="container">
+			<h1 align="center">IT Employees Management</h1>
+			
+            <div style="float:left">
+
+            <br/> <h4 style="color:blue">Internal Talent Search</h4>
+			<input type="text" ng-model="filter.name"/>
+<!--			{{filter.name}}-->
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<h5 style ="color:black; font-weight: bold">Gender</h5>
+			<input type="radio" name="sex" value="male">Male<br>
+			<input type="radio" name="sex" value="female">Female<br>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<h5 style ="color:black; font-weight: bold">City</h5>
+			<input type="radio" name="city" value="San Francisco">San Francisco<br>
+			<input type="radio" name="city" value="Fremont">Fremont<br>
+			<input type="radio" name="city" value="San Jose">San Jose<br>
+			<input type="radio" name="city" value="Santa Clara">Santa Clara<br>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<h5 style ="color:black; font-weight: bold">Skills</h5>
+			<input type="checkbox" name="skill" value="C++">C++<br>
+            <input type="checkbox" name="skill" value="Java">Java<br>
+			<input type="checkbox" name="skill" value="JavaScript">JavaScript<br>
+            <input type="checkbox" name="skill" value="Angularjs">Angularjs<br>
+			<input type="checkbox" name="skill" value="CSS3">CSS3<br>
+            <input type="checkbox" name="skill" value="HTML5">HTML5<br>
+			
+                </div>
+			<div style="margin-left:30%; border-left-style: solid; bolder-left-width:2px;">
+					<!--<tr ng-repeat="emp in employees | filter:filter.name|orderBy: 'name'"> -->
+                   
+					<div ng-repeat="emp in employees | filter:filter.name">
+					<div>
+                        <table>
+						<tr>
+						<td style="width:200px; padding-left:40px;">
+                        <img src="image/{{emp.name}}.jpg" id="circle">
+                     </td>
+					 <td>
+					 </td>
+						<td>
+                       
+							<span style ="color:blue; font-weight: bold" ng-hide="editMode">{{ emp.name | uppercase }}</span> 
+							<input type="text" ng-show="editMode" data-ng-model="emp.name" data-ng-required />
+						
+						<br />
+							<span data-ng-hide="editMode">{{ emp.class }}</span>
+			            	<input type="text" data-ng-show="editMode" data-ng-model="emp.class" data-ng-required />
+			             <br />
+							<span data-ng-hide="editMode">{{ emp.address }}</span>
+			            	<input type="text" data-ng-show="editMode" data-ng-model="emp.address" data-ng-required />
+                        <br />
+                           </td>
+							</tr>
+							</table>
+							</div>
+							<br/><br/>
+							
+							
+                            </div>
+			   </div>
+        </div> <!-- Container div ends-->
+    </div>
+            <!-- /.row -->
+    <div id="canvas-holder">
+		<canvas id="chart-area" width="500" height="500"/>
+	</div>
+</div>

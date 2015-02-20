@@ -1,0 +1,166 @@
+#grad1 {
+    border-top-style: solid;
+    border-top-color:blue;
+    padding:30px;
+    height: 1200px;
+    background: -webkit-linear-gradient(left, ##F8F8FF , white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,#F8F8FF, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,#F8F8FF, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #F8F8FF ,white); /* Standard syntax (must be last) */
+}
+
+
+
+.chartbox{
+ background-color:white;
+ padding: 5px;
+ padding-top:20px;
+ margin-left:5px;
+ margin-top:20px;
+ margin-bottom:10px;
+ border-style: solid;
+ border-color:blue;
+ width:96%;
+}
+
+@media (min-width:1200px){
+.chartbox-1{
+ margin-left:5px;
+ float:left;
+ width:34%;
+ border-style: solid;
+ border-color:#C0C0C0;
+}
+
+.chartbox-4{
+ margin-top:100px;
+ margin-left:5px;
+ float:left;
+ width:31%;
+ border-style: solid;
+ border-color:#C0C0C0;
+}
+
+.chartbox-7{
+ margin-left:5px;
+ float:left;
+ width:33%;
+ border-style: solid;
+ border-color:#C0C0C0;
+}
+.box-1{
+width:95%;
+}
+}
+@media (min-width:650px) and (max-width:1200px){
+ .chartbox-2{
+ margin-left:5px;
+ width:70%;
+ float:left;
+ border-style: solid;
+ border-color:purple;
+}
+
+ .chartbox-5{
+ margin-left:5px;
+ margin-top:20px;
+ width:70%;
+ float:left;
+ border-style: solid;
+ border-color:purple;
+}
+
+
+.chartbox-8{
+ margin-left:5px;
+ margin-top:20px;
+ float:left;
+ width:70%;
+ border-style: solid;
+ border-color:#C0C0C0;
+}
+.box-2{
+width:100%;
+}
+}
+
+
+@media (max-width:650px){
+ .chartbox-3{
+ margin-left:5px;
+ width:380px;
+ float:left;
+ border-style: solid;
+ border-color:green;
+}
+
+ .chartbox-6{
+ margin-left:5px;
+ margin-top:20px;
+ width:380px;
+ float:left;
+ border-style: solid;
+ border-color:green;
+}
+
+
+.chartbox-9{
+ margin-left:5px;
+ margin-top:20px;
+ float:left;
+ width:380px;
+ border-style: solid;
+ border-color:#C0C0C0;
+}
+.box-3{
+width:400px;
+}
+}
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: MidnightBlue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+.chart2 rect {
+  fill: YellowGreen;
+}
+
+.chart2 text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+
+.axis path,
+.axis line{
+  fill: none;
+  stroke:black;
+  shape-rendering:crispEdge;
+}
+
+.axis text{
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+h1{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+.tick
+{
+  stroke-dasharray: 1, 2;
+}
+
+#circle {
+border-radius:50% 50% 50% 50%;
+width:100px;
+height:100px;
+}
+

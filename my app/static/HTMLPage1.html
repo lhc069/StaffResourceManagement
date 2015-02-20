@@ -1,0 +1,214 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>Doughnut Chart</title>
+		<script src="Chart.js"></script>
+		<style>
+			body{
+				padding: 0;
+				margin: 0;
+			}
+			#canvas-holder{
+				width:30%;
+			}
+		</style>
+        <style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+</style>
+        <style>
+
+svg {
+  font: 10px sans-serif;
+  padding: 10px;
+}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .7;
+}
+
+</style>
+	</head>
+	<body>
+        <div class="chart">
+  <div style="width: 40px;">4</div>
+  <div style="width: 80px;">8</div>
+  <div style="width: 150px;">15</div>
+  <div style="width: 160px;">16</div>
+  <div style="width: 230px;">23</div>
+  <div style="width: 420px;">42</div>
+</div>
+
+
+		<div id="canvas-holder">
+			<canvas id="chart-area" width="500" height="500"/>
+		</div>
+
+     
+       <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+
+	<script>
+
+	    var data = {
+	        labels: ["January", "February", "March", "April", "May", "June", "July"],
+	        datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,0.8)",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }
+	        ]
+	    };
+	    window.onload = function () {
+	        var ctx = document.getElementById("chart-area").getContext("2d");
+	        window.myDoughnut = new Chart(ctx).Bar(data, { responsive: true });
+	    };
+
+
+
+	</script>
+        <script>
+
+            var width = 960,
+                size = 150,
+                padding = 19.5;
+
+            var x = d3.scale.linear()
+                .range([padding / 2, size - padding / 2]);
+
+            var y = d3.scale.linear()
+                .range([size - padding / 2, padding / 2]);
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+                .ticks(5);
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left")
+                .ticks(5);
+
+            var color = d3.scale.category10();
+
+            d3.csv("flowers.csv", function (error, data) {
+                var domainByTrait = {},
+                    traits = d3.keys(data[0]).filter(function (d) { return d !== "species"; }),
+                    n = traits.length;
+
+                traits.forEach(function (trait) {
+                    domainByTrait[trait] = d3.extent(data, function (d) { return d[trait]; });
+                });
+
+                xAxis.tickSize(size * n);
+                yAxis.tickSize(-size * n);
+
+                var svg = d3.select("body").append("svg")
+                    .attr("width", size * n + padding)
+                    .attr("height", size * n + padding)
+                  .append("g")
+                    .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+
+                svg.selectAll(".x.axis")
+                    .data(traits)
+                  .enter().append("g")
+                    .attr("class", "x axis")
+                    .attr("transform", function (d, i) { return "translate(" + (n - i - 1) * size + ",0)"; })
+                    .each(function (d) { x.domain(domainByTrait[d]); d3.select(this).call(xAxis); });
+
+                svg.selectAll(".y.axis")
+                    .data(traits)
+                  .enter().append("g")
+                    .attr("class", "y axis")
+                    .attr("transform", function (d, i) { return "translate(0," + i * size + ")"; })
+                    .each(function (d) { y.domain(domainByTrait[d]); d3.select(this).call(yAxis); });
+
+                var cell = svg.selectAll(".cell")
+                    .data(cross(traits, traits))
+                  .enter().append("g")
+                    .attr("class", "cell")
+                    .attr("transform", function (d) { return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")"; })
+                    .each(plot);
+
+                // Titles for the diagonal.
+                cell.filter(function (d) { return d.i === d.j; }).append("text")
+                    .attr("x", padding)
+                    .attr("y", padding)
+                    .attr("dy", ".71em")
+                    .text(function (d) { return d.x; });
+
+                function plot(p) {
+                    var cell = d3.select(this);
+
+                    x.domain(domainByTrait[p.x]);
+                    y.domain(domainByTrait[p.y]);
+
+                    cell.append("rect")
+                        .attr("class", "frame")
+                        .attr("x", padding / 2)
+                        .attr("y", padding / 2)
+                        .attr("width", size - padding)
+                        .attr("height", size - padding);
+
+                    cell.selectAll("circle")
+                        .data(data)
+                      .enter().append("circle")
+                        .attr("cx", function (d) { return x(d[p.x]); })
+                        .attr("cy", function (d) { return y(d[p.y]); })
+                        .attr("r", 3)
+                        .style("fill", function (d) { return color(d.species); });
+                }
+
+                function cross(a, b) {
+                    var c = [], n = a.length, m = b.length, i, j;
+                    for (i = -1; ++i < n;) for (j = -1; ++j < m;) c.push({ x: a[i], i: i, y: b[j], j: j });
+                    return c;
+                }
+
+                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
+            });
+
+</script>
+
+        <a href="irene55hang@gmail.com">Email Me</a>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+﻿<div id="page-wrapper">       
+    <div class="row">
+        <div class="container">
+			<h1 style="text-align:center">IT Employees Management</h1>
+		
+<!--bar-->
+<!-- <div ng-app="myApp" ng-controller="Ctrl"> -->
+<div ng-controller="Ctrl">
+<ul>
+    <li ng-repeat="x in myDataArray">
+          <bars-chart chart-data="x"></bars-chart>
+		  
+    </li>
+  </ul>
+</div>
+<div ng-app="chartApp" ng-controller="SalesController">
+<h1>Today's Sales Chart</h1>
+
+<div linear-chart chart-data="salesData"></div>
+</div>
+        </div> <!-- Container div ends-->
+    </div>
+            <!-- /.row -->
+   
+</div>

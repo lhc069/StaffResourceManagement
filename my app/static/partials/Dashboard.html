@@ -1,0 +1,80 @@
+<div id="page-wrapper">       
+    <div class="row">
+        <div class="container">
+			<h1 style="align:center">IT Employees Management</h1>
+			<br/> <h4 style="color:blue">Search</h4>
+			<input type="text" ng-model="filter.name"/>
+<!--			{{filter.name}}-->
+			<br/>
+			<br/>
+			<table class="table table-striped" >
+				<thead>
+				<tr>
+				  <th>Name</th>
+				  <th>Skill Set</th>
+				  <th>Address</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="emp in employees | filter:filter.name">
+					<!--<tr ng-repeat="emp in employees | filter:filter.name|orderBy(filter.name)"> -->
+						<td>
+							<span ng-hide="editMode">{{ emp.name | uppercase }}</span> 
+							<input type="text" ng-show="editMode" data-ng-model="emp.name" data-ng-required />
+						</td>
+						<td>
+							<span data-ng-hide="editMode">{{ emp.class }}</span>
+			            	<input type="text" data-ng-show="editMode" data-ng-model="emp.class" data-ng-required />
+			            </td>
+						<td> 
+							<span data-ng-hide="editMode">{{ emp.address }}</span>
+			            	<input type="text" data-ng-show="editMode" data-ng-model="emp.address" data-ng-required />
+			            </td>
+						<td>
+						   <button ng-click ="editMode=true" >Edit </button>
+						</td>
+						<td>
+						   <button ng-click ="remove($index)" >Remove </button>
+						</td>
+						<td>
+						   <button ng-click ="editMode=false" >Save </button>
+						</td>
+					</tr>
+				</tbody>
+    	</table>	
+		
+		<br/>
+		<div>
+		<div style="float:left">
+		<h4 style="color:blue">Add a New Employee </h4>
+		
+		Employee Name:<br/>
+		<input type =text" ng-model="newEmployee.name"/>
+		<br/>
+		Employee Age:<br/>
+		<input type="text" ng-model="newEmployee.age"/>
+		<br/>
+		Employee Class: <br/>
+		<input type=text" ng-model="newEmployee.class"/>
+		<br/>
+		Employee Address: <br/>
+		<input type="text" ng-model="newEmployee.address"/>
+		<br/><br/>
+		<button type="button" class="btn btn-success" ng-click="addEmployee()">Add Employee</button>
+		
+		<br/>
+		
+		</div>
+		
+ <div style="margin-left:50%">
+ <canvas tc-chartjs-doughnut chart-options="options" chart-data="data" auto-legend></canvas>
+	</div>	
+	</div>
+	
+        </div> <!-- Container div ends-->
+    </div>
+	
+	
+            <!-- /.row -->
+
+</div>
